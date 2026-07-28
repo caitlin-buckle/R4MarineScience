@@ -196,7 +196,7 @@ plot_data <- final_master_matrix %>%
 ggplot(plot_data, aes(x = mean_salinity, y = count, color = zone)) +
   geom_jitter(alpha = 0.4, width = 0.5, height = 0.2) + #add jittered points so overlapping zeros at the bottom become visible
   geom_smooth(method = "loess", se = TRUE, color = "black", size = 0.8, linetype = "dashed") + # add a smoothed trend line to show the abundance trend across increasing salinity
-  facet_wrap(~ scientific_name, scales = "free_y") + # Create a panel for each species 
+  facet_wrap(~ scientific_name, scales = "fixed") + # Create a panel for each species 
   theme_minimal(base_size = 13) +
   labs(
     x = "Mean Salinity (ppt)", #x-axis title 
