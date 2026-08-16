@@ -1,23 +1,14 @@
 ---
 title: "MB5370 Module 2 Workshop 3"
 author: "Caitlin Buckle"
-format: html
-editor: visual
+date: "2026-07-28"
+output: html_document
 ---
 
 ```{r setup, include=FALSE}
-knitr::opts_chunk$set(
-  echo = FALSE,
-  include = TRUE,
-  message = FALSE,
-  warning = FALSE,       # Added a comma here
-  fig.width = 7,         # Changed : to = and added a comma
-  fig.height = 14,       # Changed : to = and added a comma
-  fig.align = "center"   # Changed : to =
-)
+knitr::opts_chunk$set(echo = TRUE)
 ```
 
-This is a Quarto document for Module 2 Workshop 3. 
 Aim of the workshop is to continue developing our data visualisation abilities by finding a plot with visualisation issues, and then using our new skills to recreate the graph.
 
 Loading required packages
@@ -31,18 +22,18 @@ library(patchwork)
 
 My chosen plot is from "Decadal trends in shark catches and effort from the New South Wales, Australia, Shark Meshing Program 1950–2010" (Reid et al., 2011) and depicts catches (total number of sharks) in the Shark Meshing Program (SMP) in NSW, and the catches have been binned by region and beach, and then colour coded by decade. The overall message that Reid et al. were trying to communicate with this plot is a regional overview of total sharks caught in the SMP in NSW, including certain regions and beaches were the most sharks have been caught, which can prompt further investigation into the catch per unit effort (CPUE) in each area, or the proportion of caught sharks that are target species of the program. 
 
-This plot is very busy, and would benefit from being a multi-faceted plot, with one facet per region. The colour coding of the plot is also difficult to see with the grey-scale. Both of these improvements would make the plot visually easier to interpret and understand where catch hot spots are time periods where more sharks were caught in the SMP. 
+This plot is very busy, and would benefit from being a multi-faceted plot, with one facet per region. The colour coding of the plot is also difficult to see with the grey-scale. Both of these improvements would make the plot visually easier to interpret and understand where catch hot spots are and time periods where more sharks were caught in the SMP. 
 
 I couldn't find the raw dataset used by Reid et al., and didn't want to download the full NSW SMP dataset, so used plotdigitizer.com to generate the data used for this exercise. 
 
 ```{r}
-knitr::include_graphics("Catches Per Beach.png")
+knitr::include_graphics("../Catches Per Beach.png")
 ```
 
 Load in the csv file and examine the data frame structure 
 
 ```{r}
-database<- read_csv("../Module_2_Data_Science/data/workshop3/shark_data.csv")
+database <- read_csv("../data/workshop3/shark_data.csv")
 summary(database) #246 obs., 3 character variables (region, beach, time_period) and two numeric variables (bars [not important, from plot digitizer] and catch)
 ```
 
@@ -55,7 +46,7 @@ database <- database %>%
 
 To create the plot, I want a bar graph faceted by region, with beach on the x-axis and total catch on the y-axis. I am then going to stack the bars (so each decade is stacked), and colour the bars by decade also. 
 
-```{r}
+```{r, fig.height=15, fig.width=9}
 
 database <- database %>%
   mutate(Region = factor(Region, levels = c(
@@ -65,7 +56,7 @@ database <- database %>%
     "Sydney South", 
     "Illawarra"
   )),
-  Beach = fct_inorder(Beach))#mutating Region to be a factor, so the facets are correctly ordered by geographical location down the NSW coast (reading from left to right, top to bottom). Then ensuring that ggplot maintains the order of beaches in the dataframe (geographically from south to north) 
+  Beach = fct_inorder(Beach)) # mutating Region to be a factor, so the facets are correctly ordered by geographical location down the NSW coast (reading from left to right, top to bottom). Then ensuring that ggplot maintains the order of beaches in the data frame (geographically from south to north) 
 
 ggplot(database, aes(x = Beach, y = Catch, fill = Time_Period)) +
   geom_col(colour="gray15",width = 0.7, alpha = 0.9,linewidth = 0.15,position = position_stack(reverse = TRUE)) + #stacking the catch values per decade into one bar for each beach, position_stack(reverse) so that oldest decades are on the bottom, and most recent are on the top of the stacked bar
@@ -88,14 +79,3 @@ ggplot(database, aes(x = Beach, y = Catch, fill = Time_Period)) +
   )
 
 ```
-
-### Section 3: Exercise - Queensland Fisheries Data Discovery Challenge 
-
-
-
-
-
-
-
-
-

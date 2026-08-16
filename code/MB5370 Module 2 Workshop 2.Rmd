@@ -22,8 +22,11 @@ library(lubridate)
 ### Section 2.2: Tidying Data 
 
 3 Rules to Consider a Data Set 'Tidy' (all interrelated)
+
   1. Each variable must have its own column 
+  
   2. Each observation must have its own row 
+  
   3. Each value must have its own cell 
   
 These rules lead to a simple set of practical instructions --> put each data set in a tibble (special data frame), and then put each variable in a column 
@@ -431,6 +434,6 @@ penguins_spatial_clean%>%
   )
 ```
 
-### Section 2.12: Keystone Exercise: Estuary FIsh Survey - Data Rescue Mission 
+### Section 2.12: Keystone Exercise: Estuary Fish Survey - Data Rescue Mission 
 
-See MB5370_Workshop_2_Keystone.qmd for exercise. 
+See MB5370_Workshop_2_Keystone for exercise. 

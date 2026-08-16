@@ -34,15 +34,15 @@ objects()
 Practicing reading different kinds of data files into R
 ```{r}
 #Practice One: a standard csv (comma-separated plain text file)
-benthic_cover<-read.csv(here::here("data/reef_cover_log.csv")) #6 observations, 7 variables 
+benthic_cover<-read.csv(here::here("data/workshop1/reef_cover_log.csv")) #6 observations, 7 variables 
 #the here::here section of the code is telling R to start at the master folder (where your project file is held), and use this as the starting point when searching for the file you are trying to load. Then we specify we want it to look in the "data" folder, for the file named reef_cover_log.csv. If we didn't use here::here, we would have it going through specific files in our computer, which isn't reproducible for other people as they will not have the same user profiles etc. on their computer. The more you know! 
 
 #Practice Two: Parsing a tab-separated telemetry instrument array string 
-acoustic_stream<-read_tsv(here::here("data/acoustic_telemetry_stream.txt")) #6 observations, 5 variables 
+acoustic_stream<-read_tsv(here::here("data/workshop1/acoustic_telemetry_stream.txt")) #6 observations, 5 variables 
 #Parsing means taking the raw text file, breaking it down and translating it into a format that R understands 
 
 #Practice Three: Targeting a specific sheet in a multi-tab Excel spreadsheet 
-fisheries_annual<-read_excel(here::here("data/fish_catch_data.xlsx"),sheet="Commercial_2026") #5 observations, 6 variables 
+fisheries_annual<-read_excel(here::here("data/workshop1/fish_catch_data.xlsx"),sheet="Commercial_2026") #5 observations, 6 variables 
 ```
 
 If we record notes or convserational summary lines at the top of Excel data sheets, R will treat these at your database column headers, which will corrupt your entire data ingestion pipeline. 
@@ -50,11 +50,11 @@ If we record notes or convserational summary lines at the top of Excel data shee
 #### EXAMPLE: using mangrove_survey_raw.csv 
 
 ```{r}
-mangrove_data<-read_csv(file=here::here("data/mangrove_survey_raw.csv"))
+mangrove_data<-read_csv(file=here::here("data/workshop1/mangrove_survey_raw.csv"))
 #Although the .csv file reads into R, the notes at the top of the excel sheet for field team have been read in as the column header, and the other notes have been entered as variables under that column header. Not what we want!
 
 #We can use arguments within read_csv to skip headers and declare missing flags. 
-mangrove_data<-read_csv(here::here("data/mangrove_survey_raw.csv"),
+mangrove_data<-read_csv(here::here("data/workshop1/mangrove_survey_raw.csv"),
                         skip = 5, #skips the first 5 lines of the .csv file, which are the notes and not the data)
                         na=c(".","NA","9999","ND","blank")) #Converts known text alternatives into NA (you can change what you want changed to NA based on what has been used in your dataset)
 

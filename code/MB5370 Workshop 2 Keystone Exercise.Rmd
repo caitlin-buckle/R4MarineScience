@@ -1,17 +1,15 @@
 ---
-title: "MB5370 Module Two Workshop Two Keystone Exercise"
+title: "MB5370 Workshop 2 Keystone Exercise"
 author: "Caitlin Buckle"
-format: html
-editor: visual
+date: "2026-07-28"
+output: html_document
 ---
 
 ```{r setup, include=FALSE}
-knitr::opts_chunk$set(
-  echo = FALSE,
-	include = TRUE,
-	message = FALSE,
-	warning = FALSE)
+knitr::opts_chunk$set(echo = TRUE)
 ```
+
+## Introduction
 
 The Premise: You have inherited a project from a former PhD student who was studying the relationship between water quality and predatory fish assemblages along the Ross River Estuary gradient. Unfortunately, their data management was entirely manual, and the files are a disaster.
 
@@ -38,16 +36,16 @@ library(readxl) #for reading excel files
 #### Load files into R 
 ```{r}
 #Load .csv files using read_csv (files are stored in workshop2 folder inside data folder)
-metadata<- read_csv("../Module_2_Data_Science/data/workshop2/estuary_metadata.csv")
+metadata<- read_csv("../data/workshop2/estuary_metadata.csv")
 
-sonde_data<- read_csv("../Module_2_Data_Science/data/workshop2/estuary_sonde_data.csv")
+sonde_data<- read_csv("../data/workshop2/estuary_sonde_data.csv")
 
-species_dict<-read.csv("../Module_2_Data_Science/data/workshop2/species_dictionary.csv")
+species_dict<-read.csv("../data/workshop2/species_dictionary.csv")
 
-catch_log_1<- read_excel("../Module_2_Data_Science/data/workshop2/estuary_catch_log.xlsx", sheet = "Lower_ross")
-catch_log_2<- read_excel("../Module_2_Data_Science/data/workshop2/estuary_catch_log.xlsx", sheet = "Mid_Ross ")
-catch_log_3<- read_excel("../Module_2_Data_Science/data/workshop2/estuary_catch_log.xlsx", sheet = "ROSS MOUTH")
-catch_log_4<- read_excel("../Module_2_Data_Science/data/workshop2/estuary_catch_log.xlsx", sheet = "Upper Ross")
+catch_log_1<- read_excel("../data/workshop2/estuary_catch_log.xlsx", sheet = "Lower_ross")
+catch_log_2<- read_excel("../data/workshop2/estuary_catch_log.xlsx", sheet = "Mid_Ross ")
+catch_log_3<- read_excel("../data/workshop2/estuary_catch_log.xlsx", sheet = "ROSS MOUTH")
+catch_log_4<- read_excel("../data/workshop2/estuary_catch_log.xlsx", sheet = "Upper Ross")
 catch_log<-bind_rows(catch_log_1, catch_log_2, catch_log_3, catch_log_4) #individually loaded in each sheet from excel file, so had to bind them into one data frame --> catch_log
 ```
 
@@ -148,7 +146,6 @@ master_df <- master %>%
 print(master_df)
 ```
 
-
 ## PHASE THREE: ZERO CATCH FRAMEWORK 
 
 The student only recorded a row when they actually caught a fish, meaning there is no zeros in the data frame (which are important ecologically). 
@@ -163,6 +160,7 @@ final_master_matrix <- master_df %>%
 
 print(final_master_matrix)
 ```
+
 ## PHASE FOUR: STATISTICAL EXTRACTION 
 
 From your master data set, generate a clean summary table showing the mean ± standard error of both the fish catch and the salinity for each scientific species across each estuary zone.
@@ -212,5 +210,3 @@ ggplot(plot_data, aes(x = mean_salinity, y = count, color = zone)) +
     plot.subtitle = element_text(hjust = 0.5, color = "grey40")
   )
 ```
-
-
