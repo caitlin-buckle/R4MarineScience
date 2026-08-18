@@ -5,9 +5,9 @@ This repository is for the code from Module 2, R for Marine Science. We continue
 ## Folder and File Description 
 /code --> .Rmd and .Qmd files for each workshop/activity 
 
-/data --> all data used for each workshop. Note, the data from workshop 3 was sourced using plotdigitiser.com from Reid et al. (2011) 'Decadal trends in shark catches and effort from the New South Wales, Australia, Shark Meshing Program 1950–2010' paper. 
+/data --> all data used for each workshop. Note, the data from workshop 3 was sourced using plotdigitiser.com from Reid et al. (2011) 'Decadal trends in shark catches and effort from the New South Wales, Australia, Shark Meshing Program 1950–2010' paper 
 
 /output --> rendered .png images of plots created in first two workshops 
       
-
+/Catches Per Beach.png --> recreated plot fixing visualisation issues seen in Reid et al. (2011) 
 
